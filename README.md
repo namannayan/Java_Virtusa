@@ -56,21 +56,32 @@ Check balance and transaction history.
 
 Logout – Exit to main menu.
 
+# BankingSystemJDBC
+
+## Project Structure
+
+```text
 BankingSystemJDBC/
 ├── pom.xml
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   ├── db/DBConnection.java
+│   │   │   ├── db/
+│   │   │   │   └── DBConnection.java
 │   │   │   ├── model/
-│   │   │   │   ├── Account.java (abstract)
+│   │   │   │   ├── Account.java         (abstract)
 │   │   │   │   ├── SavingsAccount.java
 │   │   │   │   ├── CurrentAccount.java
 │   │   │   │   ├── Transaction.java
 │   │   │   │   └── User.java
-│   │   │   ├── service/BankService.java
-│   │   │   └── main/Main.java
-│   │   └── resources/schema.sql
+│   │   │   ├── service/
+│   │   │   │   └── BankService.java
+│   │   │   └── main/
+│   │   │       └── Main.java
+│   │   └── resources/
+│   │       └── schema.sql
 │   └── test/
 └── README.md
+
+
 Developed as a medium-level Java project to demonstrate OOP, JDBC, and MySQL integration.

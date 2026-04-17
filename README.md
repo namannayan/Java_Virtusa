@@ -41,7 +41,7 @@ Maven (optional – IDE can manage dependencies)
 
 
 
-🎮 How to Use
+How to Use
 Register – Create a new user account.
 
 Login – Use your username and password.

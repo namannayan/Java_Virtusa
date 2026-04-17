@@ -1,0 +1,34 @@
+-- schema.sql
+CREATE DATABASE IF NOT EXISTS banking_system;
+USE banking_system;
+
+-- Users table
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,  -- plain text for simplicity
+    full_name VARCHAR(100) NOT NULL
+);
+
+-- Accounts table (single table inheritance)
+CREATE TABLE accounts (
+    account_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    account_number VARCHAR(20) UNIQUE NOT NULL,
+    account_type ENUM('SAVINGS', 'CURRENT') NOT NULL,
+    balance DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Transactions table
+CREATE TABLE transactions (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    account_id INT NOT NULL,
+    transaction_type ENUM('DEPOSIT', 'WITHDRAW', 'TRANSFER_SENT', 'TRANSFER_RECEIVED') NOT NULL,
+    amount DECIMAL(15,2) NOT NULL,
+    related_account_id INT NULL,   -- for transfers (source or target)
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(255),
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
+);

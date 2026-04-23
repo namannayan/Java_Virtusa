@@ -182,17 +182,25 @@ public class Main {
         }
     }
 
-    private static int selectAccount() {
-        List<Account> accounts = bankService.getAccountsForUser(currentUser.getUserId());
-        if (accounts.isEmpty()) {
-            System.out.println("No accounts available. Please create an account first.");
-            return -1;
-        }
-        System.out.println("Select account:");
-        for (Account acc : accounts) {
-            System.out.printf("%d - %s (%s)\n", acc.getAccountId(), acc.getAccountType(), acc.getAccountNumber());
-        }
-        System.out.print("Enter Account ID: ");
-        return Integer.parseInt(scanner.nextLine());
+   private static int selectAccount() {
+    List<Account> accounts = bankService.getAccountsForUser(currentUser.getUserId());
+    if (accounts.isEmpty()) {
+        System.out.println("No accounts available. Please create an account first.");
+        return -1;
     }
+    System.out.println("Select account:");
+    for (Account acc : accounts) {
+        System.out.printf("%d - %s (%s)\n", acc.getAccountId(), acc.getAccountType(), acc.getAccountNumber());
+    }
+    System.out.print("Enter Account ID: ");
+    int enteredId = Integer.parseInt(scanner.nextLine());
+
+    for (Account acc : accounts) {
+        if (acc.getAccountId() == enteredId) {
+            return enteredId;
+        }
+    }
+    System.out.println("Invalid account ID or account does not belong to you.");
+    return -1;
+}
 }
